@@ -1,35 +1,199 @@
 
-===== FILE: src\components\BetZone.tsx =====
+===== FILE: src\components\Table\ATSZone.tsx =====
 
-interface BetZoneProps {
-    label: string;
-  }
-  
-  export default function BetZone({ label }: BetZoneProps) {
-    return (
-      <div className="bg-green-900 rounded-xl border border-green-600 p-4 text-center shadow-inner hover:bg-green-700 transition-colors">
-        <span className="block font-semibold text-lg">{label}</span>
+export default function ATSZone() {
+  return <div className="border p-2">ATSZone</div>;
+}
+
+===== FILE: src\components\Table\BigSixEightZone.tsx =====
+
+export default function BigSixEightZone() {
+  return <div className="border p-2">BigSixEightZone</div>;
+}
+
+===== FILE: src\components\Table\ComeZone.tsx =====
+
+export default function ComeZone() {
+  return <div className="border p-2">ComeZone</div>;
+}
+
+===== FILE: src\components\Table\FieldZone.tsx =====
+
+export default function FieldZone() {
+  return (
+    <div className="bg-green-700 text-yellow-300 border-2 border-yellow-500 rounded-md p-2 text-center uppercase text-xs font-bold">
+      Field
+    </div>
+  );
+}
+
+===== FILE: src\components\Table\HardwaysZone.tsx =====
+
+export default function HardwaysZone() {
+  return <div className="border p-2">HardwaysZone</div>;
+}
+
+===== FILE: src\components\Table\HopsZone.tsx =====
+
+export default function HopsZone() {
+  return <div className="border p-2">HopsZone</div>;
+}
+
+===== FILE: src\components\Table\NumberZone.tsx =====
+
+export default function NumberZone() {
+  return <div className="border p-2">NumberZone</div>;
+}
+
+===== FILE: src\components\Table\PassLineZone.tsx =====
+
+export default function PassLineZone() {
+  return (
+    <div className="bg-green-700 text-white border-2 border-white rounded-md p-2 text-center uppercase text-xs">
+      Pass Line
+    </div>
+  );
+}
+
+===== FILE: src\components\Table\PropositionZone.tsx =====
+
+export default function PropositionZone() {
+  return <div className="border p-2">PropositionZone</div>;
+}
+
+===== FILE: src\components\Table\TableLayout.tsx =====
+
+import PassLineZone from "./PassLineZone";
+import ComeZone from "./ComeZone";
+import FieldZone from "./FieldZone";
+import HardwaysZone from "./HardwaysZone";
+import NumberZone from "./NumberZone";
+import PropositionZone from "./PropositionZone";
+import HopsZone from "./HopsZone";
+import BigSixEightZone from "./BigSixEightZone";
+import ATSZone from "./ATSZone";
+
+export default function TableLayout() {
+  return (
+    <div className="grid grid-cols-12 gap-3 p-4 bg-green-900 rounded-lg shadow-inner">
+      {/* Top ATS + Come + ATS */}
+      <div className="col-span-3">
+        <ATSZone />
       </div>
-    );
-  }
-  
+      <div className="col-span-6">
+        <ComeZone />
+      </div>
+      <div className="col-span-3">
+        <ATSZone />
+      </div>
+
+      {/* Number Zones (4-10) */}
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+      <div className="col-span-2">
+        <NumberZone />
+      </div>
+
+      {/* Prop + Field + Big 6/8 */}
+      <div className="col-span-4">
+        <PropositionZone />
+        <HopsZone />
+      </div>
+      <div className="col-span-4">
+        <FieldZone />
+      </div>
+      <div className="col-span-4">
+        <BigSixEightZone />
+      </div>
+
+      {/* Hardways */}
+      <div className="col-span-12">
+        <HardwaysZone />
+      </div>
+
+      {/* Pass Line */}
+      <div className="col-span-12">
+        <PassLineZone />
+      </div>
+    </div>
+  );
+}
+
+===== FILE: src\pages\GameScreen.tsx =====
+
+// src/pages/GameScreen.tsx
+import TableLayout from "@/components/Table/TableLayout";
+
+export default function GameScreen() {
+  return (
+    <div className="flex min-h-screen bg-[#14532d] text-white font-mono">
+      {/* Left Sidebar */}
+      <aside className="w-64 bg-green-950 p-4 border-r border-green-800">
+        <h2 className="text-lg font-bold mb-4">Controls</h2>
+        <button className="w-full bg-yellow-500 text-black font-bold py-2 px-4 rounded mb-2">
+          Roll Dice
+        </button>
+        <button className="w-full bg-gray-700 text-white font-bold py-2 px-4 rounded mb-2">
+          New Game
+        </button>
+        {/* Add more control buttons here */}
+      </aside>
+
+      {/* Center: Craps Table */}
+      <main className="flex-1 p-6 flex flex-col items-center">
+        <div className="max-w-6xl w-full">
+          <h1 className="text-3xl font-bold mb-4 text-center tracking-wider">
+            Craps Table
+          </h1>
+          <div className="bg-green-800 rounded-xl p-6 shadow-inner border-4 border-yellow-500">
+            <TableLayout />
+          </div>
+        </div>
+      </main>
+
+      {/* Right Sidebar: Player Info + Log */}
+      <aside className="w-64 bg-green-950 p-4 border-l border-green-800">
+        <div className="mb-6">
+          <h2 className="text-lg font-bold mb-2">Bankroll</h2>
+          <div className="text-yellow-300 text-xl">$1500</div>
+        </div>
+
+        <div>
+          <h2 className="text-lg font-bold mb-2">Play-by-Play</h2>
+          <div className="bg-green-900 p-2 rounded h-64 overflow-y-auto text-sm">
+            <div>New game started...</div>
+            <div>Player bet on Pass Line</div>
+            <div>Rolled 7 – win!</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  );
+}
 
 ===== FILE: src\pages\GameTable.tsx =====
 
-import BetZone from "../components/BetZone";
+import TableLayout from "@/components/Table/TableLayout";
 
 export default function GameTable() {
   return (
-    <div className="min-h-screen bg-green-800 p-4 text-white flex flex-col items-center">
-      <h1 className="text-3xl font-bold mb-6">Craps Table</h1>
-
-      <div className="grid grid-cols-3 gap-4 w-full max-w-5xl">
-        <BetZone label="Pass Line" />
-        <BetZone label="Field" />
-        <BetZone label="Don't Pass" />
-        <BetZone label="Come" />
-        <BetZone label="Place Bets" />
-        <BetZone label="Big 6 / Big 8" />
+    <div className="min-h-screen bg-green-800 p-4">
+      <h1 className="text-3xl font-bold text-white mb-4 text-center">Craps Table</h1>
+      <div className="max-w-screen-xl mx-auto">
+        <TableLayout />
       </div>
     </div>
   );
@@ -37,13 +201,11 @@ export default function GameTable() {
 
 ===== FILE: src\App.tsx =====
 
-import GameTable from "./pages/GameTable";
+import GameScreen from "@/pages/GameScreen";
 
-function App() {
-  return <GameTable />;
+export default function App() {
+  return <GameScreen />;
 }
-
-export default App
 
 ===== FILE: src\index.css =====
 

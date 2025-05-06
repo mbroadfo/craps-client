@@ -1,7 +1,5 @@
-import GameTable from "./pages/GameTable";
+import GameScreen from "@/pages/GameScreen";
 
-function App() {
-  return <GameTable />;
+export default function App() {
+  return <GameScreen />;
 }
-
-export default App

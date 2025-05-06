@@ -10,7 +10,7 @@ import ATSZone from "./ATSZone";
 
 export default function TableLayout() {
   return (
-    <div className="grid grid-cols-12 gap-2 p-4 bg-green-900 text-white text-sm">
+    <div className="grid grid-cols-12 gap-3 p-4 bg-green-900 rounded-lg shadow-inner">
       {/* Top ATS + Come + ATS */}
       <div className="col-span-3">
         <ATSZone />
